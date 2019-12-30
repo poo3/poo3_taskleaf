@@ -3937,3 +3937,64 @@ Completed 200 OK in 45ms (Views: 40.1ms | ActiveRecord: 0.5ms)
   ↳ bin/rails:9
   [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
   [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+Started GET "/" for ::1 at 2019-12-30 18:34:34 +0900
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/poo3/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.4/lib/active_record/log_subscriber.rb:98
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/tasks/index.html.slim:12
+  Rendered tasks/index.html.slim within layouts/application (29.9ms)
+Completed 200 OK in 1961ms (Views: 1842.4ms | ActiveRecord: 29.4ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-12-30 18:34:39 +0900
+Processing by TasksController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8
+  Rendering tasks/new.html.slim within layouts/application
+  Rendered tasks/_form.html.slim (14.9ms)
+  Rendered tasks/new.html.slim within layouts/application (23.0ms)
+Completed 200 OK in 59ms (Views: 53.2ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/tasks" for ::1 at 2019-12-30 20:08:01 +0900
+Processing by TasksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2nLKMecgpkPWaoKN2ZzIjq15xpo01YXK7hP8su+StOao7u7xexIUDbHY+P/RRJK/QsjvORkaP+cAVegNIk9wtg==", "task"=>{"name"=>"", "description"=>""}, "commit"=>"登録する"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:26
+  [1m[36mTask Create (1.0ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", ""], ["description", ""], ["created_at", "2019-12-30 11:08:01.897356"], ["updated_at", "2019-12-30 11:08:01.897356"], ["user_id", 1]]
+  ↳ app/controllers/tasks_controller.rb:26
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:26
+Redirected to http://localhost:3000/tasks/2
+Completed 302 Found in 8ms (ActiveRecord: 2.6ms)
+
+
+Started GET "/tasks/2" for ::1 at 2019-12-30 20:08:01 +0900
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1 AND "tasks"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:48
+  Rendering tasks/show.html.slim within layouts/application
+  Rendered tasks/show.html.slim within layouts/application (6.3ms)
+Completed 200 OK in 66ms (Views: 59.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/admin/users" for ::1 at 2019-12-30 20:08:06 +0900
+Processing by Admin::UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8
+  Rendering admin/users/index.html.slim within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/admin/users/index.html.slim:16
+  Rendered admin/users/index.html.slim within layouts/application (7.7ms)
+Completed 200 OK in 44ms (Views: 37.9ms | ActiveRecord: 0.7ms)
+
+
