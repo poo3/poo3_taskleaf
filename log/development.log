@@ -4054,3 +4054,81 @@ Processing by TasksController#show as HTML
 Completed 200 OK in 59ms (Views: 51.6ms | ActiveRecord: 0.9ms)
 
 
+Started GET "/tasks" for ::1 at 2019-12-31 20:21:31 +0900
+  
+ActionController::RoutingError (undefined local variable or method `task_logger' for TasksController:Class):
+  
+app/controllers/tasks_controller.rb:47:in `<class:TasksController>'
+app/controllers/tasks_controller.rb:1:in `<top (required)>'
+Started GET "/tasks" for ::1 at 2019-12-31 20:35:49 +0900
+  
+ActionController::RoutingError (undefined local variable or method `task_logger' for TasksController:Class):
+  
+app/controllers/tasks_controller.rb:57:in `<class:TasksController>'
+app/controllers/tasks_controller.rb:1:in `<top (required)>'
+Started GET "/tasks" for ::1 at 2019-12-31 20:36:18 +0900
+  
+ActionController::RoutingError (undefined local variable or method `task_logger' for TasksController:Class):
+  
+app/controllers/tasks_controller.rb:42:in `<class:TasksController>'
+app/controllers/tasks_controller.rb:1:in `<top (required)>'
+Started GET "/tasks" for ::1 at 2019-12-31 20:43:00 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.5ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/tasks/index.html.slim:12
+  Rendered tasks/index.html.slim within layouts/application (17.3ms)
+Completed 200 OK in 138ms (Views: 74.9ms | ActiveRecord: 8.1ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-12-31 20:43:03 +0900
+Processing by TasksController#new as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  Rendering tasks/new.html.slim within layouts/application
+  Rendered tasks/_form.html.slim (5.0ms)
+  Rendered tasks/new.html.slim within layouts/application (11.9ms)
+Completed 200 OK in 64ms (Views: 55.9ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/tasks" for ::1 at 2019-12-31 20:43:30 +0900
+Processing by TasksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"GcdL4LY/ZiuluHrnHwPCI0ZgYVSSjfGz1FsJmdObZgNrW28gKg3UZcIKAJUX25gSqdFI979CS546HR0mHkaiUw==", "task"=>{"name"=>"log-test", "description"=>"logのフォーマットの設定が反映されているか確認"}, "commit"=>"登録する"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:26
+  [1m[36mTask Create (3.6ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "log-test"], ["description", "logのフォーマットの設定が反映されているか確認"], ["created_at", "2019-12-31 11:43:30.188571"], ["updated_at", "2019-12-31 11:43:30.188571"], ["user_id", 1]]
+  ↳ app/controllers/tasks_controller.rb:26
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:26
+task: {"id"=>4, "name"=>"log-test", "description"=>"logのフォーマットの設定が反映されているか確認", "created_at"=>Tue, 31 Dec 2019 20:43:30 JST +09:00, "updated_at"=>Tue, 31 Dec 2019 20:43:30 JST +09:00, "user_id"=>1}
+Redirected to http://localhost:3000/tasks/4
+Completed 302 Found in 13ms (ActiveRecord: 5.3ms)
+
+
+Started GET "/tasks/4" for ::1 at 2019-12-31 20:43:30 +0900
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1 AND "tasks"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:49
+  Rendering tasks/show.html.slim within layouts/application
+  Rendered tasks/show.html.slim within layouts/application (9.5ms)
+Completed 200 OK in 55ms (Views: 47.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/tasks" for ::1 at 2019-12-31 20:43:33 +0900
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/tasks/index.html.slim:12
+  Rendered tasks/index.html.slim within layouts/application (7.0ms)
+Completed 200 OK in 51ms (Views: 43.9ms | ActiveRecord: 0.6ms)
+
+
