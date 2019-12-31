@@ -3998,3 +3998,59 @@ Processing by Admin::UsersController#index as HTML
 Completed 200 OK in 44ms (Views: 37.9ms | ActiveRecord: 0.7ms)
 
 
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" ORDER BY "tasks"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" ORDER BY "tasks"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" ORDER BY "tasks"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/" for ::1 at 2019-12-31 18:17:39 +0900
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/poo3/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.4/lib/active_record/log_subscriber.rb:98
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  Rendering tasks/index.html.slim within layouts/application
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1 ORDER BY "tasks"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/tasks/index.html.slim:12
+  Rendered tasks/index.html.slim within layouts/application (27.1ms)
+Completed 200 OK in 461ms (Views: 400.8ms | ActiveRecord: 11.1ms)
+
+
+Started GET "/tasks/new" for ::1 at 2019-12-31 19:12:03 +0900
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/poo3/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.4/lib/active_record/log_subscriber.rb:98
+Processing by TasksController#new as HTML
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  Rendering tasks/new.html.slim within layouts/application
+  Rendered tasks/_form.html.slim (28.6ms)
+  Rendered tasks/new.html.slim within layouts/application (40.7ms)
+Completed 200 OK in 390ms (Views: 295.4ms | ActiveRecord: 11.7ms)
+
+
+Started POST "/tasks" for ::1 at 2019-12-31 19:13:13 +0900
+Processing by TasksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"9esvxxpDjiB12woihY21VGQRW6ghPf7iJs7q7wd/ibeHdwsHhnE8bhJpcFCNVe9li6ByCwzyRM/IiP5QyqJN5w==", "task"=>{"name"=>"debug-test", "description"=>"ログにタスクの情報をdebugレベルで出力する、という指定した。"}, "commit"=>"登録する"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/tasks_controller.rb:26
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("name", "description", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "debug-test"], ["description", "ログにタスクの情報をdebugレベルで出力する、という指定した。"], ["created_at", "2019-12-31 10:13:13.597826"], ["updated_at", "2019-12-31 10:13:13.597826"], ["user_id", 1]]
+  ↳ app/controllers/tasks_controller.rb:26
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/tasks_controller.rb:26
+task: {"id"=>3, "name"=>"debug-test", "description"=>"ログにタスクの情報をdebugレベルで出力する、という指定した。", "created_at"=>Tue, 31 Dec 2019 19:13:13 JST +09:00, "updated_at"=>Tue, 31 Dec 2019 19:13:13 JST +09:00, "user_id"=>1}
+Redirected to http://localhost:3000/tasks/3
+Completed 302 Found in 21ms (ActiveRecord: 2.3ms)
+
+
+Started GET "/tasks/3" for ::1 at 2019-12-31 19:13:13 +0900
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT  "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1 AND "tasks"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:49
+  Rendering tasks/show.html.slim within layouts/application
+  Rendered tasks/show.html.slim within layouts/application (8.6ms)
+Completed 200 OK in 59ms (Views: 51.6ms | ActiveRecord: 0.9ms)
+
+
