@@ -1,0 +1,43 @@
+D, [2020-01-04T02:19:45.838999 #35644] DEBUG -- :   [1m[35m (459.1ms)[0m  [1m[35mCREATE DATABASE "taskleaf_production" ENCODING = 'unicode'[0m
+D, [2020-01-04T02:19:45.931945 #35644] DEBUG -- :   [1m[35m (15.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+D, [2020-01-04T02:19:45.939931 #35644] DEBUG -- :   [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+D, [2020-01-04T02:19:45.942772 #35644] DEBUG -- :   [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7410968178381677175)[0m
+D, [2020-01-04T02:19:45.957166 #35644] DEBUG -- :   [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+I, [2020-01-04T02:19:45.959202 #35644]  INFO -- : Migrating to CreateTasks (20191206064323)
+D, [2020-01-04T02:19:45.963865 #35644] DEBUG -- :   [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+D, [2020-01-04T02:19:45.974404 #35644] DEBUG -- :   [1m[35m (9.9ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "name" character varying, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+D, [2020-01-04T02:19:45.979544 #35644] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191206064323"]]
+D, [2020-01-04T02:19:45.980217 #35644] DEBUG -- :   [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+I, [2020-01-04T02:19:45.980285 #35644]  INFO -- : Migrating to ChangeTasksNameNotNull (20191215105935)
+D, [2020-01-04T02:19:45.981413 #35644] DEBUG -- :   [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+D, [2020-01-04T02:19:45.986577 #35644] DEBUG -- :   [1m[35m (4.9ms)[0m  [1m[35mALTER TABLE "tasks" ALTER COLUMN "name" SET NOT NULL[0m
+D, [2020-01-04T02:19:45.987931 #35644] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191215105935"]]
+D, [2020-01-04T02:19:45.988475 #35644] DEBUG -- :   [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+I, [2020-01-04T02:19:45.988542 #35644]  INFO -- : Migrating to ChangeTasksNameLimit30 (20191215112628)
+D, [2020-01-04T02:19:45.990197 #35644] DEBUG -- :   [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+D, [2020-01-04T02:19:45.999538 #35644] DEBUG -- :   [1m[35m (9.0ms)[0m  [1m[35mALTER TABLE "tasks" ALTER COLUMN "name" TYPE character varying(30)[0m
+D, [2020-01-04T02:19:46.001117 #35644] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191215112628"]]
+D, [2020-01-04T02:19:46.007187 #35644] DEBUG -- :   [1m[35m (5.8ms)[0m  [1m[35mCOMMIT[0m
+I, [2020-01-04T02:19:46.007299 #35644]  INFO -- : Migrating to CreateUsers (20191216232723)
+D, [2020-01-04T02:19:46.009242 #35644] DEBUG -- :   [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+D, [2020-01-04T02:19:46.013981 #35644] DEBUG -- :   [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying NOT NULL, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+D, [2020-01-04T02:19:46.019314 #35644] DEBUG -- :   [1m[35m (1.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+D, [2020-01-04T02:19:46.020240 #35644] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191216232723"]]
+D, [2020-01-04T02:19:46.020814 #35644] DEBUG -- :   [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+I, [2020-01-04T02:19:46.020880 #35644]  INFO -- : Migrating to AddAdminToUsers (20191217001255)
+D, [2020-01-04T02:19:46.023664 #35644] DEBUG -- :   [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+D, [2020-01-04T02:19:46.027340 #35644] DEBUG -- :   [1m[35m (3.1ms)[0m  [1m[35mALTER TABLE "users" ADD "admin" boolean DEFAULT FALSE NOT NULL[0m
+D, [2020-01-04T02:19:46.028791 #35644] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191217001255"]]
+D, [2020-01-04T02:19:46.029375 #35644] DEBUG -- :   [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+I, [2020-01-04T02:19:46.029460 #35644]  INFO -- : Migrating to AddUserIdToTasks (20191228133454)
+D, [2020-01-04T02:19:46.031449 #35644] DEBUG -- :   [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+D, [2020-01-04T02:19:46.035998 #35644] DEBUG -- :   [1m[35m (4.3ms)[0m  [1m[31mDELETE FROM tasks;[0m
+D, [2020-01-04T02:19:46.037443 #35644] DEBUG -- :   [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "tasks" ADD "user_id" bigint NOT NULL[0m
+D, [2020-01-04T02:19:46.040407 #35644] DEBUG -- :   [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_tasks_on_user_id" ON "tasks"  ("user_id")[0m
+D, [2020-01-04T02:19:46.041382 #35644] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191228133454"]]
+D, [2020-01-04T02:19:46.041852 #35644] DEBUG -- :   [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+D, [2020-01-04T02:19:46.046954 #35644] DEBUG -- :   [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+D, [2020-01-04T02:19:46.054578 #35644] DEBUG -- :   [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+D, [2020-01-04T02:19:46.056928 #35644] DEBUG -- :   [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "production"], ["created_at", "2020-01-03 17:19:46.054806"], ["updated_at", "2020-01-03 17:19:46.054806"]]
+D, [2020-01-04T02:19:46.057490 #35644] DEBUG -- :   [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+D, [2020-01-04T02:19:46.057794 #35644] DEBUG -- :   [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7410968178381677175)[0m
