@@ -70,3 +70,5 @@ gem 'rails_autolink'
 gem 'rspec-rails', '~> 3.7'
 # FctoryBot追加してくっ！
 gem 'factory_bot_rails', '~> 4.11'
+#検索を助けてくれる機能
+gem 'ransack'
