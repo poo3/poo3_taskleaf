@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   def index
     @q = current_user.tasks.ransack(params[:q])
-    @tasks = @q.result(distinct: true).recent
+    @tasks = @q.result(distinct: true)
   end
 
   def show
@@ -31,6 +31,9 @@ class TasksController < ApplicationController
 
     if @task.save
       logger.debug "task: #{@task.attributes.inspect}"
+      #メール送信処理
+      TaskMailer.creation_email(@task).deliver_now
+
       redirect_to @task, notice: "タスク「#{@task.name}」を登録しました"
     else
       render :new
