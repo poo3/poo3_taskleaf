@@ -74,3 +74,5 @@ gem 'factory_bot_rails', '~> 4.11'
 gem 'ransack'
 #ページネーションをする機能
 gem 'kaminari'
+#非同期ツールの導入
+gem 'sidekiq'
