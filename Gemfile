@@ -76,3 +76,5 @@ gem 'ransack'
 gem 'kaminari'
 #非同期ツールの導入
 gem 'sidekiq'
+#Webpackerの導入
+gem 'webpacker'
